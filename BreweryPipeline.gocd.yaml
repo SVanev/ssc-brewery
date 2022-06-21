@@ -39,3 +39,8 @@ pipelines:
                       - tomcat:run
                     command: mvn
                     run_if: passed
+                - exec:
+                    arguments:
+                      - tomcat:run
+                    command: mvn
+                    run_if: passed
