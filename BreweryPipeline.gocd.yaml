@@ -27,5 +27,6 @@ pipelines:
                 arguments:
                 - clean
                 - package
+                - test
                 command: mvn
                 run_if: passed
