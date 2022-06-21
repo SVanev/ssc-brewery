@@ -6,27 +6,31 @@ pipelines:
     lock_behavior: none
     display_order: -1
     materials:
-      git-2d63201:
+      git-19edcf0:
         git: https://github.com/SVanev/ssc-brewery
         shallow_clone: false
         auto_update: true
         branch: master
     stages:
-    - BreweryStage:
-        fetch_materials: true
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-          allow_only_on_success: false
-        jobs:
-          BreweryJob:
-            timeout: 0
-            tasks:
-            - exec:
-                arguments:
-                - clean
-                - package
-                - test
-                command: mvn
-                run_if: passed
+      - BreweryStage:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            BreweryJob:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - clean
+                      - package
+                    command: mvn
+                    run_if: passed
+                - exec:
+                    arguments:
+                      - test
+                    command: mvn
+                    run_if: passed
